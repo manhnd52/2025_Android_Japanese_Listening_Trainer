@@ -12,9 +12,11 @@ class MockAudioRepository : AudioRepository {
         audioDatabase.add(Audio(3, "Không còn anh cạnh bên em, tạm biệt một tương lai tăm tối"))
     }
 
-    override suspend fun add(audio: Audio) {
+    override suspend fun add(audio: Audio) : Int{
         audioDatabase.add(audio)
+        return audioDatabase.indexOf(audio)
     }
+
     override suspend fun delete(audio: Audio) {
         audioDatabase.remove(audio)
     }

@@ -18,8 +18,10 @@ package com.example.japaneselisteningtrainer.data
 
 import android.content.Context
 import com.example.japaneselisteningtrainer.data.audio.AudioRepository
+import com.example.japaneselisteningtrainer.data.audio.LocalAudioRepository
 import com.example.japaneselisteningtrainer.data.audio.MockAudioRepository
 import com.example.japaneselisteningtrainer.data.folder.FolderRepository
+import com.example.japaneselisteningtrainer.data.folder.LocalFolderRepository
 import com.example.japaneselisteningtrainer.data.folder.MockFolderRepository
 
 /**
@@ -37,9 +39,11 @@ class AppDataContainer(private val context: Context) : AppContainer {
     /**
      * Implementation for [AudioRepository]
      */
-    override val audioRepositoty: AudioRepository = MockAudioRepository()
+    private val jltDbHelper = JLTDbHelper(context)
+
+    override val audioRepositoty: AudioRepository = LocalAudioRepository(jltDbHelper)
     /**
      * Implementation for [FolderRepository]
      */
-    override val folderRepository: FolderRepository = MockFolderRepository()
+    override val folderRepository: FolderRepository = LocalFolderRepository(jltDbHelper)
 }
